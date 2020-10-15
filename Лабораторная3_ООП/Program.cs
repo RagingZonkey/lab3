@@ -16,14 +16,15 @@ namespace Лабораторная3_ООП
         public string Name;
         public string Authors;
         public string Publishing_House_Name;
-        int Pages_Amount;
+        double Pages_Amount;
         double Price;
         public string Binding_Type;
         static int Object_Counter = 0;
         string value = "     ";
         string amount = "50";
         string Id;
-        int Publ_Year;
+        public int Publ_Year;
+
 
         //Пустой конструктор
         public Book()
@@ -40,7 +41,7 @@ namespace Лабораторная3_ООП
         }
 
         //Конструктор с параметрами
-        public Book(string name, string authors, string pub_house_name, int publ_year, int pages_amount, double price, string binding_type, string id)
+        public Book(string name, string authors, string pub_house_name, int publ_year, double pages_amount, double price, string binding_type, string id)
         {
             Name = name;
             Authors = authors;
@@ -54,7 +55,7 @@ namespace Лабораторная3_ООП
         }
 
         //Конструктор с параметрами по умолчанию 
-        public Book(string name, string authors, string pub_house_name, int publ_year, string binding_type, string id, int pages_amount = 502, double price= 10.75)
+        public Book(string name, string authors, string pub_house_name, int publ_year, string binding_type, string id, double pages_amount = 502, double price= 10.75)
         {
             Name = name;
             Authors = authors;
@@ -67,7 +68,7 @@ namespace Лабораторная3_ООП
             Object_Counter++;
         }
 
-        public void Pages_Per_Ruble (ref Book vl, out double price1 )
+        public void Pages_Per_Ruble (ref Book vl, out double price1)
         {
         price1 = vl.Pages_Amount / vl.Price;
         }
@@ -78,6 +79,10 @@ namespace Лабораторная3_ООП
 
         }
 
+             static void CounterOutput()
+        {
+            Console.WriteLine("Количество созданных экземпляров объекта Book равно {0}", Object_Counter);
+        }
         
 
 
@@ -106,7 +111,7 @@ namespace Лабораторная3_ООП
             }
 
     }
-
+  
    
 
     class Program
@@ -114,7 +119,7 @@ namespace Лабораторная3_ООП
         static void Main(string[] args)
         {
             int Size;
-            float price1;
+            double price1;
             Console.WriteLine("Введите размер массива объектов типа Book: ");
             Size = Convert.ToInt32(Console.ReadLine());
             Book[] Books = new Book[Size];
@@ -125,25 +130,50 @@ namespace Лабораторная3_ООП
 
 
             //Вызов конструктра с параметрами
-            Books[1] = new Book("Мертвые души", "Н. Гоголь", "Эксмо", 320, 7.71, @"""твердый""", 40);
-            Trains[1].Output();
+            Books[1] = new Book("Мертвые души", "Н. Гоголь", "Эксмо", 2018, 320, 7.71, @"""твердый""", "AFCD67");
+            Books[1].Output();
             
             //Вызов конструктора с параметрами по умолчанию
-            Books[2] = new Book(@"""1984""", "Д. Оруэлл", "АСТ", @"""мягкий""", );
+            Books[2] = new Book(@"""1984""", "Д. Оруэлл", "АСТ", 2019,  @"""мягкий""", "ASNP85");
             Books[2].Output();
             Books[2].Pages_Per_Ruble(ref Books[2], out price1);
-            Console.WriteLine($"В этой книге 1 рубль в среднем вы получаете {price1} страниц");
+            Console.WriteLine($"В этой книге за 1 рубль в среднем вы получаете {price1} страниц");
 
             //Trains[0].CounterOutput();
 
-            Console.WriteLine($"Строка представляющая объект Trains: {Trains[0].ToString()}");
+            Console.WriteLine($"Строка представляющая объект Books: {Books[0].ToString()}");
 
-            Console.WriteLine($"Экземпляры Trains[0] и Trains[1] равны: {Trains[0].Equals(Trains[1])}");
+            Console.WriteLine($"Экземпляры Books[0] и Books[1] равны: {Books[0].Equals(Books[1])}");
 
-            Console.WriteLine($"Хеш-код экземпляра Trains[0]: {Trains[0].GetHashCode()}");
+            Console.WriteLine($"Хеш-код экземпляра Books[0]: {Books[0].GetHashCode()}");
 
-            Console.WriteLine($"Тип экземпляра Trains[0]: {Trains[0].GetType()}");
+            Console.WriteLine($"Тип экземпляра Books[0]: {Books[0].GetType()}");
 
+
+            //Поиск книг по автору
+            string auth;
+            Console.WriteLine("Книги какого автора вы хотите найти?");
+            auth = Console.ReadLine();
+
+            for (int i = 0; i < Size; i++)
+            {
+                if(Books[i].Authors == auth)
+                {
+                    Console.WriteLine($"Название книги данного автора:  {Books[i].Name} ");
+                }
+            }
+
+            int year;
+            Console.WriteLine("Год, после которого выпущена книга?");
+            year = Convert.ToInt32(Console.ReadLine());
+           
+             for (int i = 0; i < Size; i++)
+            {
+                if(Books[i].Publ_Year >= year)
+                {
+                    Console.WriteLine($"Название книги :  {Books[i].Name} ");
+                }
+            }
         }
     }
 
