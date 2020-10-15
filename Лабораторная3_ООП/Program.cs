@@ -17,31 +17,35 @@ namespace Лабораторная3_ООП
         public string Authors;
         public string Publishing_House_Name;
         int Pages_Amount;
-        float Price;
+        double Price;
         public string Binding_Type;
-        static readonly string Id;
         static int Object_Counter = 0;
-
+        string value = "     ";
+        string amount = "50";
+        string Id;
+        int Publ_Year;
 
         //Пустой конструктор
         public Book()
         {
-            Name = "Преступление и наказание";
+            Name = @"""Преступление и наказание""";
             Authors = "Ф.М. Достоевский";
             Publishing_House_Name = "Азбука";
+            Publ_Year = 2015;
             Pages_Amount = 608;
-            Additional(ref Price);
+            Price = 8;
             Binding_Type = @"""твердый""";
-            Id = Name.GetHashCode() + Authors.GetHashCode();
+            Id = "ABCD1";
             Object_Counter++;
         }
 
         //Конструктор с параметрами
-        public Book(string name, string authors, string pub_house_name, int pages_amount, float price, string binding_type, string id)
+        public Book(string name, string authors, string pub_house_name, int publ_year, int pages_amount, double price, string binding_type, string id)
         {
             Name = name;
             Authors = authors;
             Publishing_House_Name = pub_house_name;
+            Publ_Year = publ_year;
             Pages_Amount = pages_amount;
             Price = price;
             Binding_Type = binding_type;
@@ -50,11 +54,12 @@ namespace Лабораторная3_ООП
         }
 
         //Конструктор с параметрами по умолчанию 
-        public Book(string name, string authors, string pub_house_name, int pages_amount = 502, float price = 10.75, string binding_type, string id)
+        public Book(string name, string authors, string pub_house_name, int publ_year, string binding_type, string id, int pages_amount = 502, double price= 10.75)
         {
             Name = name;
             Authors = authors;
             Publishing_House_Name = pub_house_name;
+            Publ_Year = publ_year;
             Pages_Amount = pages_amount;
             Price = price;
             Binding_Type = binding_type;
@@ -62,7 +67,7 @@ namespace Лабораторная3_ООП
             Object_Counter++;
         }
 
-        public void Pages_Per_Ruble (ref Book vl, out float price1 )
+        public void Pages_Per_Ruble (ref Book vl, out double price1 )
         {
         price1 = vl.Pages_Amount / vl.Price;
         }
@@ -73,16 +78,10 @@ namespace Лабораторная3_ООП
 
         }
 
-
-    }
-
-    partial class Book()
-        {
-        string value = "     ";
-        string price1 = "03:00";
+        
 
 
-         public string Price
+         public string Price_GS
         {
             get
             {
@@ -94,48 +93,46 @@ namespace Лабораторная3_ООП
             }
         }
 
-          public void Output()
-        {
-            Console.WriteLine($"Книга под названием {this.Name}" +
+        public void Output()
+            {
+                Console.WriteLine($"Книга под названием {this.Name}" +
                 $" автора {this.Authors}" +
                 $" издательства {this.Publishing_House_Name}" +
+                $" {this.Publ_Year} года" +
                 $" в переплете типа {this.Binding_Type}" +
                 $" толщиной {this.Pages_Amount} страниц, " +
-                $"имеет уникальный номер {this.PlacesLuxury} " +
-                $"и стоит {this.PlacesReserved} рублей");
-        }
+                $"имеет уникальный номер {this.Id} " +
+                $"и стоит {this.Price} рублей");
+            }
 
-        static void Class_Info()
-        {
-            Console.WriteLine($"Количество созданных экземпляров объекта Book равно: {Objects_Counter}");
-        }
-      
+    }
 
-        }
+   
+
     class Program
     {
         static void Main(string[] args)
         {
             int Size;
             float price1;
-            Console.WriteLine("Введите размер массива классов Books: ");
+            Console.WriteLine("Введите размер массива объектов типа Book: ");
             Size = Convert.ToInt32(Console.ReadLine());
             Book[] Books = new Book[Size];
 
             //Вызов простого конструктора
-            Book[0] = new Book();
-            Trains[0].Output();
+            Books[0] = new Book();
+            Books[0].Output();
 
 
             //Вызов конструктра с параметрами
-            Trains[1] = new Train("Минск", 706, "6:33", 60, 45, 30, 40);
+            Books[1] = new Book("Мертвые души", "Н. Гоголь", "Эксмо", 320, 7.71, @"""твердый""", 40);
             Trains[1].Output();
             
             //Вызов конструктора с параметрами по умолчанию
-            Trains[2] = new Train("Минск", 60, 45, 30, places4: 30);
-            Trains[2].Output();
-            Trains[2].AllPlaces(ref Trains[2], out places);
-            Console.WriteLine("Количество мест в поезде: {0}", places);
+            Books[2] = new Book(@"""1984""", "Д. Оруэлл", "АСТ", @"""мягкий""", );
+            Books[2].Output();
+            Books[2].Pages_Per_Ruble(ref Books[2], out price1);
+            Console.WriteLine($"В этой книге 1 рубль в среднем вы получаете {price1} страниц");
 
             //Trains[0].CounterOutput();
 
@@ -149,4 +146,6 @@ namespace Лабораторная3_ООП
 
         }
     }
+
+
 }

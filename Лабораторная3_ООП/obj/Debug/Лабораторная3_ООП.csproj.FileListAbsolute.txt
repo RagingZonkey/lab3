@@ -1,2 +1,7 @@
 C:\Users\yegor\lab3\Лабораторная3_ООП\obj\Debug\Лабораторная3_ООП.csprojAssemblyReference.cache
 C:\Users\yegor\lab3\Лабораторная3_ООП\obj\Debug\Лабораторная3_ООП.csproj.CoreCompileInputs.cache
+C:\Users\yegor\lab3\Лабораторная3_ООП\bin\Debug\Лабораторная3_ООП.exe.config
+C:\Users\yegor\lab3\Лабораторная3_ООП\bin\Debug\Лабораторная3_ООП.exe
+C:\Users\yegor\lab3\Лабораторная3_ООП\bin\Debug\Лабораторная3_ООП.pdb
+C:\Users\yegor\lab3\Лабораторная3_ООП\obj\Debug\Лабораторная3_ООП.exe
+C:\Users\yegor\lab3\Лабораторная3_ООП\obj\Debug\Лабораторная3_ООП.pdb
